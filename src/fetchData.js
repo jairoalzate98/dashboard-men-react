@@ -29,7 +29,7 @@ function getSuspender(promise) {
 }
 
 export function fetchData(endpoint) {
-    let url = "http://localhost:8000/api/"
+    let url = "http://localhost:8000/"
     const promise = fetch(url+endpoint)
         .then((response) => response.json())
         .then((data) => data)

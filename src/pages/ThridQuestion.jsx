@@ -1,18 +1,9 @@
 import { fetchData } from '../fetchData'
-import {
-    Card,
-    Table,
-    TableHead,
-    TableRow,
-    TableHeaderCell,
-    TableBody,
-    TableCell,
-    Text
-} from "@tremor/react";
+import { Card, Title, BarChart, Subtitle } from "@tremor/react";
 
-const firstQuestionData = fetchData('estratos/')
+const firstQuestionData = fetchData('animalesVacunados/')
 
-const FirstQuestion = () => {
+const ThridQuestion = () => {
     const data = firstQuestionData.read()
     console.log('aca data ->', data)
     const top5 = data.results.sort((a, b) => b - a)
@@ -34,32 +25,18 @@ const FirstQuestion = () => {
                 Numero de casas por areas y estratos
             </h2>
             <Card>
-                <Table className="mt-1">
-                    <TableHead>
-                        <TableRow>
-                            <TableHeaderCell>Areas</TableHeaderCell>
-                            <TableHeaderCell>Estrato</TableHeaderCell>
-                            <TableHeaderCell>Numero de casas</TableHeaderCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {top5.map((item) => (
-                            <TableRow key={item.areas}>
-                                <TableCell>{item.areas}</TableCell>
-                                <TableCell>
-                                    <Text>{item.estrato}</Text>
-                                </TableCell>
-                                <TableCell>
-                                    <Text>{item.num_estrato}</Text>
-                                </TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
+                <Title>Numero de animales y animales vacuandos por especie</Title>
+                <BarChart
+                    className="mt-6"
+                    data={top5}
+                    index="estrato"
+                    categories={["num_gatos", "num_gatos_vacu", "num_perros", "num_perros_vacu", "num_equino", "num_equino_vacu"]}
+                    yAxisWidth={48}
+                />
             </Card>
         </>
     )
 
 }
 
-export default FirstQuestion
+export default ThridQuestion
